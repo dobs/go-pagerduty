@@ -105,7 +105,7 @@ func (c *Client) PreviewSchedule(s Schedule, o PreviewScheduleOptions) error {
 	if err != nil {
 		return err
 	}
-	var data map[string]Schedule
+	data := make(map[string]Schedule)
 	data["schedule"] = s
 	_, e := c.post("/schedules/preview?"+v.Encode(), data, nil)
 	return e

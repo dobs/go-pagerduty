@@ -32,8 +32,6 @@ type Meta struct {
 	Loglevel  string
 }
 
-type FlagSetFlags uint
-
 func (m *Meta) FlagSet(n string) *flag.FlagSet {
 	f := flag.NewFlagSet(n, flag.ContinueOnError)
 	f.StringVar(&m.Authtoken, "authtoken", "", "PagerDuty API authentication token")

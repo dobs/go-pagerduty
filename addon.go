@@ -48,10 +48,10 @@ func (c *Client) InstallAddon(a Addon) (*Addon, error) {
 	data := make(map[string]Addon)
 	data["addon"] = a
 	resp, err := c.post("/addons", data, nil)
-	defer resp.Body.Close()
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusCreated {
 		return nil, fmt.Errorf("Failed to create. HTTP Status code: %d", resp.StatusCode)
 	}
