@@ -7,40 +7,39 @@ import (
 	"github.com/google/go-querystring/query"
 )
 
-// ContactMethod is a way of contacting the user.
-type ContactMethod struct {
-	ID             string
-	Label          string
-	Address        string
-	Type           string
-	SendShortEmail bool `json:"send_short_email"`
-}
-
 // NotificationRule is a rule for notifying the user.
 type NotificationRule struct {
-	ID                  string
+	ID                  string        `json:"id"`
 	StartDelayInMinutes uint          `json:"start_delay_in_minutes"`
 	CreatedAt           string        `json:"created_at"`
 	ContactMethod       ContactMethod `json:"contact_method"`
-	Urgency             string
-	Type                string
+	Urgency             string        `json:"urgency"`
+	Type                string        `json:"type"`
 }
 
 // User is a member of a PagerDuty account that has the ability to interact with incidents and other data on the account.
 type User struct {
 	APIObject
-	Name              string `json:"name"`
-	Email             string `json:"email"`
-	Timezone          string `json:"timezone,omitempty"`
-	Color             string `json:"color,omitempty"`
-	Role              string `json:"role,omitempty"`
-	AvatarURL         string `json:"avatar_url,omitempty"`
-	Description       string `json:"description,omitempty"`
-	InvitationSent    bool
+	Type              string             `json:"type"`
+	Name              string             `json:"name"`
+	Summary           string             `json:"summary"`
+	Email             string             `json:"email"`
+	Timezone          string             `json:"time_zone,omitempty"`
+	Color             string             `json:"color,omitempty"`
+	Role              string             `json:"role,omitempty"`
+	AvatarURL         string             `json:"avatar_url,omitempty"`
+	Description       string             `json:"description,omitempty"`
+	InvitationSent    bool               `json:"invitation_sent,omitempty"`
 	ContactMethods    []ContactMethod    `json:"contact_methods"`
 	NotificationRules []NotificationRule `json:"notification_rules"`
 	JobTitle          string             `json:"job_title,omitempty"`
 	Teams             []Team
+}
+
+// ContactMethodResponse is the data structure returned from calling the GetUserContactMethod API endpoint.
+type ContactMethodResponse struct {
+	ContactMethods []ContactMethod `json:"contact_methods"`
+	Total          int
 }
 
 // ListUsersResponse is the data structure returned from calling the ListUsers API endpoint.
@@ -60,6 +59,12 @@ type ListUsersOptions struct {
 // GetUserOptions is the data structure used when calling the GetUser API endpoint.
 type GetUserOptions struct {
 	Includes []string `url:"include,omitempty,brackets"`
+}
+
+// ListUserContactMethodsResponse is the data structure returned from calling the ListUserContactMethods API endpoint.
+type ListUserContactMethodsResponse struct {
+	APIListObject
+	ContactMethods []ContactMethod `json:"contact_methods"`
 }
 
 // ListUsers lists users of your PagerDuty account, optionally filtered by a search query.
@@ -100,6 +105,17 @@ func (c *Client) GetUser(id string, o GetUserOptions) (*User, error) {
 	return getUserFromResponse(c, resp, err)
 }
 
+// GetUserContactMethod fetches contact methods of the existing user.
+func (c *Client) GetUserContactMethod(id string) (*ContactMethodResponse, error) {
+	resp, err := c.get("/users/" + id + "/contact_methods")
+	if err != nil {
+		return nil, err
+	}
+
+	var result ContactMethodResponse
+	return &result, c.decodeJSON(resp, &result)
+}
+
 // UpdateUser updates an existing user.
 func (c *Client) UpdateUser(u User) (*User, error) {
 	v := make(map[string]User)
@@ -122,4 +138,15 @@ func getUserFromResponse(c *Client, resp *http.Response, err error) (*User, erro
 		return nil, fmt.Errorf("JSON response does not have %s field", rootNode)
 	}
 	return &t, nil
+}
+
+// List a user's contact methods
+// TODO: Unify with `ListContactMethods`.
+func (c *Client) ListUserContactMethods(id string) (*ListUserContactMethodsResponse, error) {
+	resp, err := c.get("/users/" + id + "/contact_methods")
+	if err != nil {
+		return nil, err
+	}
+	var result ListUserContactMethodsResponse
+	return &result, c.decodeJSON(resp, &result)
 }
