@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type EscalationPolicyDelete struct {
@@ -13,9 +12,7 @@ func EscalationPolicyDeleteCommand() (cli.Command, error) {
 }
 
 func (c *EscalationPolicyDelete) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *EscalationPolicyDelete) Synopsis() string {

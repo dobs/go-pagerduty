@@ -3,14 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/PagerDuty/go-pagerduty"
-	log "github.com/Sirupsen/logrus"
-	"github.com/mitchellh/go-homedir"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/PagerDuty/go-pagerduty"
+	log "github.com/Sirupsen/logrus"
+	"github.com/mitchellh/go-homedir"
+	"gopkg.in/yaml.v2"
 )
 
 type ArrayFlags []string
@@ -55,7 +56,7 @@ func (m *Meta) Help() string {
 
 func (m *Meta) validate() error {
 	if m.Authtoken == "" {
-		return fmt.Errorf("Authtoken can not be blank")
+		return fmt.Errorf("authtoken can not be blank")
 	}
 	return nil
 }

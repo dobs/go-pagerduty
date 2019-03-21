@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type UserNotificationRuleList struct {
@@ -13,9 +12,7 @@ func UserNotificationRuleListCommand() (cli.Command, error) {
 }
 
 func (c *UserNotificationRuleList) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *UserNotificationRuleList) Synopsis() string {

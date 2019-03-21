@@ -11,7 +11,7 @@ import (
 func TextEditor(content []byte) ([]byte, error) {
 	editor := os.Getenv("EDITOR")
 	if editor == "" {
-		return []byte{}, fmt.Errorf("Please set the EDITOR environment variable")
+		return []byte{}, fmt.Errorf("please set the EDITOR environment variable")
 	}
 	f, err := ioutil.TempFile("", "pd_")
 	if err != nil {

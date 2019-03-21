@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type ScheduleOverrideDelete struct {
@@ -13,9 +12,7 @@ func ScheduleOverrideDeleteCommand() (cli.Command, error) {
 }
 
 func (c *ScheduleOverrideDelete) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *ScheduleOverrideDelete) Synopsis() string {

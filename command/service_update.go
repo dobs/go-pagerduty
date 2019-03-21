@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type ServiceUpdate struct {
@@ -13,9 +12,7 @@ func ServiceUpdateCommand() (cli.Command, error) {
 }
 
 func (c *ServiceUpdate) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *ServiceUpdate) Synopsis() string {

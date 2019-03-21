@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/mitchellh/cli"
 	"os"
+
+	"github.com/mitchellh/cli"
 )
 
 const (
-	version = "0.0.0"
+	defaultHelpText = ""
+	version         = "0.0.0"
 )
 
 func loadCommands() map[string]cli.CommandFactory {

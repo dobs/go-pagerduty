@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type UserContactMethodDelete struct {
@@ -13,9 +12,7 @@ func UserContactMethodDeleteCommand() (cli.Command, error) {
 }
 
 func (c *UserContactMethodDelete) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *UserContactMethodDelete) Synopsis() string {

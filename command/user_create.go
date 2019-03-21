@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type UserCreate struct {
@@ -13,9 +12,7 @@ func UserCreateCommand() (cli.Command, error) {
 }
 
 func (c *UserCreate) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *UserCreate) Synopsis() string {

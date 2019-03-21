@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/PagerDuty/go-pagerduty"
 	log "github.com/Sirupsen/logrus"
 	"github.com/mitchellh/cli"
 	"gopkg.in/yaml.v2"
-	"strings"
 )
 
 type ServiceList struct {
@@ -64,19 +65,22 @@ func (c *ServiceList) Run(args []string) int {
 		Query:    query,
 		Includes: includes,
 	}
-	if serviceList, err := client.ListServices(opts); err != nil {
+
+	serviceList, err := client.ListServices(opts)
+	if err != nil {
 		log.Error(err)
 		return -1
-	} else {
-		for i, service := range serviceList.Services {
-			fmt.Println("Entry: ", i+1)
-			data, err := yaml.Marshal(service)
-			if err != nil {
-				log.Error(err)
-				return -1
-			}
-			fmt.Println(string(data))
-		}
 	}
+
+	for i, service := range serviceList.Services {
+		fmt.Println("Entry: ", i+1)
+		data, err := yaml.Marshal(service)
+		if err != nil {
+			log.Error(err)
+			return -1
+		}
+		fmt.Println(string(data))
+	}
+
 	return 0
 }

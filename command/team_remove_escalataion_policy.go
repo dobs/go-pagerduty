@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type TeamRemoveEscalationPolicy struct {
@@ -13,9 +12,7 @@ func TeamRemoveEscalationPolicyCommand() (cli.Command, error) {
 }
 
 func (c *TeamRemoveEscalationPolicy) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *TeamRemoveEscalationPolicy) Synopsis() string {

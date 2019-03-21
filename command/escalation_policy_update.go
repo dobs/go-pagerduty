@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type EscalationPolicyUpdateUpdate struct {
@@ -13,9 +12,7 @@ func EscalationPolicyUpdateCommand() (cli.Command, error) {
 }
 
 func (c *EscalationPolicyUpdateUpdate) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *EscalationPolicyUpdateUpdate) Synopsis() string {

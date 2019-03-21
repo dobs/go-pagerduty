@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type LogEntryShow struct {
@@ -13,9 +12,7 @@ func LogEntryShowCommand() (cli.Command, error) {
 }
 
 func (c *LogEntryShow) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *LogEntryShow) Synopsis() string {

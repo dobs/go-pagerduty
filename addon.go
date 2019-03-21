@@ -53,7 +53,7 @@ func (c *Client) InstallAddon(a Addon) (*Addon, error) {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusCreated {
-		return nil, fmt.Errorf("Failed to create. HTTP Status code: %d", resp.StatusCode)
+		return nil, fmt.Errorf("failed to create. HTTP Status code: %d", resp.StatusCode)
 	}
 	return getAddonFromResponse(c, resp)
 }

@@ -158,7 +158,7 @@ func getEscalationRuleFromResponse(c *Client, resp *http.Response, err error) (*
 	}
 	var target map[string]EscalationRule
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", dErr)
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
 	}
 	rootNode := "escalation_rule"
 	t, nodeOK := target[rootNode]
@@ -175,7 +175,7 @@ func getEscalationPolicyFromResponse(c *Client, resp *http.Response, err error) 
 	}
 	var target map[string]EscalationPolicy
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", dErr)
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
 	}
 	rootNode := "escalation_policy"
 	t, nodeOK := target[rootNode]

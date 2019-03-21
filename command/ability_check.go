@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/mitchellh/cli"
 	"strings"
+
+	"github.com/mitchellh/cli"
 )
 
 type AbilityTest struct {

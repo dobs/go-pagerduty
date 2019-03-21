@@ -112,7 +112,7 @@ func getMaintenanceWindowFromResponse(c *Client, resp *http.Response, err error)
 	}
 	var target map[string]MaintenanceWindow
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", dErr)
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
 	}
 	rootNode := "maintenance_window"
 	t, nodeOK := target[rootNode]

@@ -129,7 +129,7 @@ type GetScheduleOptions struct {
 func (c *Client) GetSchedule(id string, o GetScheduleOptions) (*Schedule, error) {
 	v, err := query.Values(o)
 	if err != nil {
-		return nil, fmt.Errorf("Could not parse values for query: %v", err)
+		return nil, fmt.Errorf("could not parse values for query: %v", err)
 	}
 	resp, err := c.get("/schedules/" + id + "?" + v.Encode())
 	if err != nil {
@@ -240,7 +240,7 @@ func (c *Client) ListOnCallUsers(id string, o ListOnCallUsersOptions) ([]User, e
 func getScheduleFromResponse(c *Client, resp *http.Response) (*Schedule, error) {
 	var target map[string]Schedule
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", dErr)
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
 	}
 	rootNode := "schedule"
 	t, nodeOK := target[rootNode]
@@ -253,7 +253,7 @@ func getScheduleFromResponse(c *Client, resp *http.Response) (*Schedule, error) 
 func getOverrideFromResponse(c *Client, resp *http.Response) (*Override, error) {
 	var target map[string]Override
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", dErr)
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
 	}
 	rootNode := "override"
 	o, nodeOK := target[rootNode]

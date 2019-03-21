@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/PagerDuty/go-pagerduty"
 	log "github.com/Sirupsen/logrus"
 	"github.com/mitchellh/cli"
 	"gopkg.in/yaml.v2"
-	"strings"
 )
 
 type IncidentList struct {
@@ -56,19 +57,22 @@ func (c *IncidentList) Run(args []string) int {
 		SortBy:   sortBy,
 		Includes: includes,
 	}
-	if incidentList, err := client.ListIncidents(opts); err != nil {
+
+	incidentList, err := client.ListIncidents(opts)
+	if err != nil {
 		log.Error(err)
 		return -1
-	} else {
-		for i, incident := range incidentList.Incidents {
-			fmt.Println("Entry: ", i+1)
-			data, err := yaml.Marshal(incident)
-			if err != nil {
-				log.Error(err)
-				return -1
-			}
-			fmt.Println(string(data))
-		}
 	}
+
+	for i, incident := range incidentList.Incidents {
+		fmt.Println("Entry: ", i+1)
+		data, err := yaml.Marshal(incident)
+		if err != nil {
+			log.Error(err)
+			return -1
+		}
+		fmt.Println(string(data))
+	}
+
 	return 0
 }

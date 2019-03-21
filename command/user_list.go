@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/PagerDuty/go-pagerduty"
 	log "github.com/Sirupsen/logrus"
 	"github.com/mitchellh/cli"
 	"gopkg.in/yaml.v2"
-	"strings"
 )
 
 type UserList struct {
@@ -60,19 +61,22 @@ func (c *UserList) Run(args []string) int {
 		TeamIDs:  teamIDs,
 		Includes: includes,
 	}
-	if resp, err := client.ListUsers(opts); err != nil {
+
+	resp, err := client.ListUsers(opts)
+	if err != nil {
 		log.Error(err)
 		return -1
-	} else {
-		for i, p := range resp.Users {
-			fmt.Println("Entry: ", i)
-			data, err := yaml.Marshal(p)
-			if err != nil {
-				log.Error(err)
-				return -1
-			}
-			fmt.Println(string(data))
-		}
 	}
+
+	for i, p := range resp.Users {
+		fmt.Println("Entry: ", i)
+		data, err := yaml.Marshal(p)
+		if err != nil {
+			log.Error(err)
+			return -1
+		}
+		fmt.Println(string(data))
+	}
+
 	return 0
 }
