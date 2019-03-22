@@ -1,12 +1,14 @@
+// nolint:dupl
 package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/PagerDuty/go-pagerduty"
 	log "github.com/Sirupsen/logrus"
 	"github.com/mitchellh/cli"
 	"gopkg.in/yaml.v2"
-	"strings"
 )
 
 type VendorList struct {
@@ -52,19 +54,21 @@ func (c *VendorList) Run(args []string) int {
 	opts := pagerduty.ListVendorOptions{
 		Query: query,
 	}
-	if resp, err := client.ListVendors(opts); err != nil {
+
+	resp, err := client.ListVendors(opts)
+	if err != nil {
 		log.Error(err)
 		return -1
-	} else {
-		for i, p := range resp.Vendors {
-			fmt.Println("Entry: ", i)
-			data, err := yaml.Marshal(p)
-			if err != nil {
-				log.Error(err)
-				return -1
-			}
-			fmt.Println(string(data))
+	}
+
+	for i, p := range resp.Vendors {
+		fmt.Println("Entry: ", i)
+		data, err := yaml.Marshal(p)
+		if err != nil {
+			log.Error(err)
+			return -1
 		}
+		fmt.Println(string(data))
 	}
 
 	return 0

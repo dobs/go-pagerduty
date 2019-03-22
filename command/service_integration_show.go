@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type ServiceIntegrationShow struct {
@@ -13,9 +12,7 @@ func ServiceIntegrationShowCommand() (cli.Command, error) {
 }
 
 func (c *ServiceIntegrationShow) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *ServiceIntegrationShow) Synopsis() string {

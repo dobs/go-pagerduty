@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/PagerDuty/go-pagerduty"
 	log "github.com/Sirupsen/logrus"
 	"github.com/mitchellh/cli"
 	"gopkg.in/yaml.v2"
-	"strings"
 )
 
 type EscalationPolicyList struct {
@@ -68,19 +69,22 @@ func (c *EscalationPolicyList) Run(args []string) int {
 		Includes: includes,
 		SortBy:   sortBy,
 	}
-	if eps, err := client.ListEscalationPolicies(opts); err != nil {
+
+	eps, err := client.ListEscalationPolicies(opts)
+	if err != nil {
 		log.Error(err)
 		return -1
-	} else {
-		for i, p := range eps.EscalationPolicies {
-			fmt.Println("Entry: ", i)
-			data, err := yaml.Marshal(p)
-			if err != nil {
-				log.Error(err)
-				return -1
-			}
-			fmt.Println(string(data))
-		}
 	}
+
+	for i, p := range eps.EscalationPolicies {
+		fmt.Println("Entry: ", i)
+		data, err := yaml.Marshal(p)
+		if err != nil {
+			log.Error(err)
+			return -1
+		}
+		fmt.Println(string(data))
+	}
+
 	return 0
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type ServiceDelete struct {
@@ -13,9 +12,7 @@ func ServiceDeleteCommand() (cli.Command, error) {
 }
 
 func (c *ServiceDelete) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *ServiceDelete) Synopsis() string {

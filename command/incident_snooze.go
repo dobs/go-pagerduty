@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type IncidentSnooze struct {
@@ -13,9 +12,7 @@ func IncidentSnoozeCommand() (cli.Command, error) {
 }
 
 func (c *IncidentSnooze) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *IncidentSnooze) Synopsis() string {

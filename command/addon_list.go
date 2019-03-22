@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/PagerDuty/go-pagerduty"
 	log "github.com/Sirupsen/logrus"
 	"github.com/mitchellh/cli"
 	"gopkg.in/yaml.v2"
-	"strings"
 )
 
 type AddonList struct {
@@ -58,19 +59,22 @@ func (c *AddonList) Run(args []string) int {
 		ServiceIDs: serviceIDs,
 		Filter:     filter,
 	}
-	if addonList, err := client.ListAddons(opts); err != nil {
+
+	addonList, err := client.ListAddons(opts)
+	if err != nil {
 		log.Error(err)
 		return -1
-	} else {
-		for i, addon := range addonList.Addons {
-			fmt.Println("Entry: ", i)
-			data, err := yaml.Marshal(addon)
-			if err != nil {
-				log.Error(err)
-				return -1
-			}
-			fmt.Println(string(data))
-		}
 	}
+
+	for i, addon := range addonList.Addons {
+		fmt.Println("Entry: ", i)
+		data, err := yaml.Marshal(addon)
+		if err != nil {
+			log.Error(err)
+			return -1
+		}
+		fmt.Println(string(data))
+	}
+
 	return 0
 }

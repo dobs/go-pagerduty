@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type IncidentNoteList struct {
@@ -13,9 +12,7 @@ func IncidentNoteListCommand() (cli.Command, error) {
 }
 
 func (c *IncidentNoteList) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *IncidentNoteList) Synopsis() string {

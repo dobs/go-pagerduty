@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type ScheduleUpdate struct {
@@ -13,9 +12,7 @@ func ScheduleUpdateCommand() (cli.Command, error) {
 }
 
 func (c *ScheduleUpdate) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *ScheduleUpdate) Synopsis() string {

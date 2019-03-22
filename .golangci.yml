@@ -1,0 +1,25 @@
+linters:
+  enable:
+    - golint
+    - stylecheck
+    - gosec
+    - interfacer
+    - unconvert
+    - dupl
+    - goconst
+    - gocyclo
+    - gofmt
+    - goimports
+    - depguard
+    - misspell
+    - unparam
+    - nakedret
+    - prealloc
+    - scopelint
+    - gocritic
+    - gochecknoinits
+    - gochecknoglobals
+
+issues:
+  max-per-linter: 0
+  max-same-issues: 0

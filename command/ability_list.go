@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/mitchellh/cli"
 	"log"
 	"strings"
+
+	"github.com/mitchellh/cli"
 )
 
 type AbilityList struct {

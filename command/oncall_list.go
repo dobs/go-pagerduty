@@ -70,16 +70,19 @@ func (c *OncallList) Run(args []string) int {
 		Since:               since,
 		Earliest:            earliest,
 	}
-	if oncs, err := client.ListOnCalls(opts); err != nil {
+
+	oncs, err := client.ListOnCalls(opts)
+	if err != nil {
 		log.Error(err)
 		return -1
-	} else {
-		data, err := yaml.Marshal(oncs.OnCalls)
-		if err != nil {
-			log.Error(err)
-			return -1
-		}
-		fmt.Println(string(data))
 	}
+
+	data, err := yaml.Marshal(oncs.OnCalls)
+	if err != nil {
+		log.Error(err)
+		return -1
+	}
+	fmt.Println(string(data))
+
 	return 0
 }

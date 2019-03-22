@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type ScheduleDelete struct {
@@ -13,9 +12,7 @@ func ScheduleDeleteCommand() (cli.Command, error) {
 }
 
 func (c *ScheduleDelete) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *ScheduleDelete) Synopsis() string {

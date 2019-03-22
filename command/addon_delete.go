@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	log "github.com/Sirupsen/logrus"
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type AddonDelete struct {

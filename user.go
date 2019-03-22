@@ -130,7 +130,7 @@ func getUserFromResponse(c *Client, resp *http.Response, err error) (*User, erro
 	}
 	var target map[string]User
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", dErr)
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
 	}
 	rootNode := "user"
 	t, nodeOK := target[rootNode]

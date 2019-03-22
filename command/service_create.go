@@ -1,13 +1,15 @@
+// nolint:dupl
 package main
 
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/PagerDuty/go-pagerduty"
 	log "github.com/Sirupsen/logrus"
 	"github.com/mitchellh/cli"
-	"os"
-	"strings"
 )
 
 type ServiceCreate struct {

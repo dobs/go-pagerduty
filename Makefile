@@ -21,3 +21,5 @@ test:
 deploy:
 	- curl -sL https://git.io/goreleaser | bash
 
+lint:
+	golangci-lint run

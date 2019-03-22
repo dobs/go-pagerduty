@@ -95,7 +95,7 @@ func getTeamFromResponse(c *Client, resp *http.Response, err error) (*Team, erro
 	}
 	var target map[string]Team
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", dErr)
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
 	}
 	rootNode := "team"
 	t, nodeOK := target[rootNode]

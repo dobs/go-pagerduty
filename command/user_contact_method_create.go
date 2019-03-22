@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type UserContactMethodCreate struct {
@@ -13,9 +12,7 @@ func UserContactMethodCreateCommand() (cli.Command, error) {
 }
 
 func (c *UserContactMethodCreate) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *UserContactMethodCreate) Synopsis() string {

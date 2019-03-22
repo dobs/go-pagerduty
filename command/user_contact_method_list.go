@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type UserContactMethodList struct {
@@ -13,9 +12,7 @@ func UserContactMethodListCommand() (cli.Command, error) {
 }
 
 func (c *UserContactMethodList) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *UserContactMethodList) Synopsis() string {

@@ -81,6 +81,7 @@ type HTTPClient interface {
 // http.DefaultClient.
 //
 // Keep this unexported so consumers of the package can't make changes to it.
+// nolint:gochecknoglobals
 var defaultHTTPClient HTTPClient = newDefaultHTTPClient()
 
 // Client wraps http client
@@ -153,15 +154,15 @@ func (c *Client) decodeJSON(resp *http.Response, payload interface{}) error {
 
 func (c *Client) checkResponse(resp *http.Response, err error) (*http.Response, error) {
 	if err != nil {
-		return resp, fmt.Errorf("Error calling the API endpoint: %v", err)
+		return resp, fmt.Errorf("error calling the API endpoint: %v", err)
 	}
 	if 199 >= resp.StatusCode || 300 <= resp.StatusCode {
 		var eo *errorObject
 		var getErr error
 		if eo, getErr = c.getErrorFromResponse(resp); getErr != nil {
-			return resp, fmt.Errorf("Response did not contain formatted error: %s. HTTP response code: %v. Raw response: %+v", getErr, resp.StatusCode, resp)
+			return resp, fmt.Errorf("response did not contain formatted error: %s. HTTP response code: %v. Raw response: %+v", getErr, resp.StatusCode, resp)
 		}
-		return resp, fmt.Errorf("Failed call API endpoint. HTTP response code: %v. Error: %v", resp.StatusCode, eo)
+		return resp, fmt.Errorf("failed call API endpoint. HTTP response code: %v. Error: %v", resp.StatusCode, eo)
 	}
 	return resp, nil
 }
@@ -169,7 +170,7 @@ func (c *Client) checkResponse(resp *http.Response, err error) (*http.Response, 
 func (c *Client) getErrorFromResponse(resp *http.Response) (*errorObject, error) {
 	var result map[string]errorObject
 	if err := c.decodeJSON(resp, &result); err != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", err)
+		return nil, fmt.Errorf("could not decode JSON response: %v", err)
 	}
 	s, ok := result["error"]
 	if !ok {

@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type TeamDelete struct {
@@ -13,9 +12,7 @@ func TeamDeleteCommand() (cli.Command, error) {
 }
 
 func (c *TeamDelete) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *TeamDelete) Synopsis() string {

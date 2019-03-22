@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/mitchellh/cli"
-	"strings"
 )
 
 type ScheduleOncallList struct {
@@ -13,9 +12,7 @@ func ScheduleOncallListCommand() (cli.Command, error) {
 }
 
 func (c *ScheduleOncallList) Help() string {
-	helpText := `
-	`
-	return strings.TrimSpace(helpText)
+	return defaultHelpText
 }
 
 func (c *ScheduleOncallList) Synopsis() string {

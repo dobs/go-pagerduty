@@ -112,6 +112,9 @@ type GetServiceOptions struct {
 // GetService gets details about an existing service.
 func (c *Client) GetService(id string, o *GetServiceOptions) (*Service, error) {
 	v, err := query.Values(o)
+	if err != nil {
+		return nil, err
+	}
 	resp, err := c.get("/services/" + id + "?" + v.Encode())
 	return getServiceFromResponse(c, resp, err)
 }
@@ -177,7 +180,7 @@ func getServiceFromResponse(c *Client, resp *http.Response, err error) (*Service
 	}
 	var target map[string]Service
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", dErr)
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
 	}
 	rootNode := "service"
 	t, nodeOK := target[rootNode]
@@ -193,7 +196,7 @@ func getIntegrationFromResponse(c *Client, resp *http.Response, err error) (*Int
 	}
 	var target map[string]Integration
 	if dErr := c.decodeJSON(resp, &target); dErr != nil {
-		return nil, fmt.Errorf("Could not decode JSON response: %v", err)
+		return nil, fmt.Errorf("could not decode JSON response: %v", err)
 	}
 	rootNode := "integration"
 	t, nodeOK := target[rootNode]
