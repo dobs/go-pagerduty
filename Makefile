@@ -1,22 +1,14 @@
-# SOURCEDIR=.
-# SOURCES = $(shell find $(SOURCEDIR) -name '*.go')
-# VERSION=$(git describe --always --tags)
-# BINARY=bin/pd
+build: deps test vet
+	go build -o bin/pd ./command
 
-# bin: $(BINARY)
-
-# $(BINARY): $(SOURCES)
-# 	go build -o $(BINARY) command/*
-
-.PHONY: build
-build:
+deps:
 	go get ./...
-	# go test -v -race -cover ./...
-	# go tool vet $(SOURCES)
 
-.PHONY: test
-test:
-	go test ./...
+test: deps
+	go test -v -race -cover ./...
+
+vet: deps
+	go vet ./...
 
 deploy:
 	- curl -sL https://git.io/goreleaser | bash
