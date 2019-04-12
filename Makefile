@@ -23,3 +23,6 @@ deploy:
 
 lint:
 	golangci-lint run
+
+format:
+	gofmt -w .
